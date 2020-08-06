@@ -32,15 +32,14 @@ module.exports = function(server) {
 
             /* fix the connection to a static IP that the front end does not know about */
             // infos comes in from the front end change it here
-            //infos.domain = '';
-            //infos.userName = 'DemoApps';
-            //infos.password = 'AppPa$$Demo';
-            //infos.ip = '64.62.141.10';
-            //infos.port = 3389;
-            console.log('ip=' + infos.ip);
-            console.log('launch=' + infos.launch);
-            infos.alternateShell = 'c:\\Progs-Demo\\GradeTronics_PCver.exe';
-            console.log(infos);
+            if (infos.username == 'GradeTronic') {
+                //this hides everything from the prying eyes of the frontend
+                infos.domain = '';
+                infos.username = 'DemoAppsUser';
+                infos.password = 'AppPa$$Demo';
+                infos.alternateShell = 'c:\\Progs-Demo\\GradeTronics_PCver.exe';
+            };
+            //console.log(infos);
             rdpClient = rdp.createClient({
                 domain: infos.domain,
                 userName: infos.username,
