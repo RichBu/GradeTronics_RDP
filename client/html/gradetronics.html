@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!--
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="./img/favicon.ico"> -->
+
+    <title>Rich Budek | App-GradeTronics</title>
+    <!--
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    -->
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+        /* Add a gray background color and some padding to the footer */
+        
+        footer {
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <!--    
+       <link href="./css/signin.css" rel="stylesheet" 
+    -->
+
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <script type="text/javascript" src="./socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="./js/mstsc.js"></script>
+    <script type="text/javascript" src="./js/keyboard.js"></script>
+    <script type="text/javascript" src="./js/rle.js"></script>
+    <script type="text/javascript" src="./js/client.js"></script>
+    <script type="text/javascript" src="./js/canvas.js"></script>
+    <script language="javascript">
+        var client = null;
+
+        function load(canvas) {
+            client = Mstsc.client.create(Mstsc.$(canvas));
+        }
+
+        function showRDP() {
+            Mstsc.$("header-rdp").style.display = 'inline';
+            window.scrollTo(0, 0)
+            $("body").css("overflow", "hidden");
+            $("#header-rdp").css("padding", "0px");
+            $("#header-rdp").css("line-height", "10px");
+            $("#main-container").css("padding-top", "10px");
+            Mstsc.$("main").style.display = 'none';
+            Mstsc.$("header-container").style.display = 'none';
+        }
+
+        function hideRDP() {
+            $("body").css("overflow", "auto");
+            $("#main-container").css("padding-top", "130px");
+            Mstsc.$("header-rdp").style.display = 'none';
+            Mstsc.$("myCanvas").style.display = 'none';
+            Mstsc.$("main").style.display = 'inline';
+            Mstsc.$("header-container").style.display = 'inline';
+        }
+
+        function connect(ip, domain, username, password) {
+            showRDP();
+            var canvas = Mstsc.$("myCanvas");
+            canvas.style.display = 'inline';
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            client.connect(ip, domain, username, password, function(err) {
+                hideRDP();
+            });
+        }
+
+        function connBttn() {
+            console.log('right at button');
+            //fix address and login
+            var const_ip = '40.78.138.118';
+            var const_domain = '';
+            var const_username = '';
+            var const_password = '';
+            var const_launch = '';
+            console.log('button pressed');
+            //const_ip = '64.62.141.10';
+            //const_domain = '';
+            //const_username = 'DemoApps';
+            //const_password = 'AppPa$$Demo';
+
+            const_ip = '40.78.138.118';
+            const_domain = 'TestDomain';
+            const_username = 'GradeTronic';
+
+            connect(const_ip, const_domain, const_username, const_password, const_launch);
+        };
+
+        function showAbout() {
+            $("body").css("overflow", "auto");
+            Mstsc.$("header-rdp").style.display = 'none';
+            Mstsc.$("main").style.display = 'inline';
+            Mstsc.$("header-container").style.display = 'inline';
+            Mstsc.$("section-about").style.display = 'inline';
+            Mstsc.$("section-desc").style.display = 'none';
+            Mstsc.$("section-tech").style.display = 'none';
+            Mstsc.$("section-demo").style.display = 'none';
+        }
+
+        function showDesc() {
+            $("body").css("overflow", "auto");
+            Mstsc.$("header-rdp").style.display = 'none';
+            Mstsc.$("main").style.display = 'inline';
+            Mstsc.$("header-container").style.display = 'inline';
+            Mstsc.$("section-about").style.display = 'none';
+            Mstsc.$("section-desc").style.display = 'inline';
+            Mstsc.$("section-tech").style.display = 'none';
+            Mstsc.$("section-demo").style.display = 'none';
+        }
+
+        function showTech() {
+            $("body").css("overflow", "auto");
+            Mstsc.$("header-rdp").style.display = 'none';
+            Mstsc.$("main").style.display = 'inline';
+            Mstsc.$("header-container").style.display = 'inline';
+            Mstsc.$("section-about").style.display = 'none';
+            Mstsc.$("section-desc").style.display = 'none';
+            Mstsc.$("section-tech").style.display = 'inline';
+            Mstsc.$("section-demo").style.display = 'none';
+        }
+
+        function showDemo() {
+            $("body").css("overflow", "auto");
+            Mstsc.$("header-rdp").style.display = 'none';
+            Mstsc.$("main").style.display = 'inline';
+            Mstsc.$("header-container").style.display = 'inline';
+            Mstsc.$("section-about").style.display = 'none';
+            Mstsc.$("section-desc").style.display = 'none';
+            Mstsc.$("section-tech").style.display = 'none';
+            Mstsc.$("section-demo").style.display = 'inline';
+        }
+    </script>
+</head>
+
+<body id="main-body" onload='load("myCanvas")'>
+    <div id="header-container">
+        <header id="masthead">
+            <div class="container">
+                <a href="http://www.richbudek.com" id="logo">Rich Budek</a>
+                <nav>
+                    <a href="#" onclick="showAbout()">About</a>
+                    <a href="#" onclick="showDesc()">Description</a>
+                    <a href="#" onclick="showTech()">Tech Used</a>
+                    <a href="#" onclick="showDemo()">Demo</a>
+                    <a href="https://richbu.github.io/Bio/portfolio.html">Back</a>
+                    <!-- <a href="contact.html">Contact</a> -->
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <div id="header-rdp">
+        <h3>
+            &nbsp;&nbsp;GradeTronics on-line demo. &nbsp;&nbsp;Quit app to go back
+        </h3>
+        <h4>&nbsp;&nbsp;&nbsp;&nbsp;(scrolling in browser does not work, you need to resize browser to view)</h4>
+    </div>
+
+    <div id="main-container" class="container">
+        <div id="main">
+            <section class="main-section-full">
+                <h1>
+                    <p style="float:left;">GradeTronics - ScanTron Grading App</p>
+                    <a onclick="connBttn()" class="bttn_click3"><br/>On-Line Demo</a>
+                    <br/>
+                    <hr/>
+                </h1>
+
+                <div id="section-about">
+                    <h3>
+                        <p>This app was developed by me, Rich Budek, to allow teachers to grade ScanTron forms on their own computer. No grading machine is needed. In addition the software prints an analytical report that lets the teacher know which questions
+                            were answered wrong and why.
+                        </p>
+                        <br/>
+                        <p>Click on the top navigation bar for more description or an on-line demo</p>
+                    </h3>
+                </div>
+
+                <div id="section-desc" style="display:none;">
+                    <h3>
+                        <p>Description</p><br/>
+                        <p>On the PC version, all the app needs to grade the form is a JPEG image. &nbsp; &nbsp; The user can mass scan all the forms on a copier, storing the images on a USB drive.&nbsp;&nbsp;Or, the user can take pictures on their cell
+                            phone.
+                        </p>
+                    </h3>
+
+                    <div class="container-fluid bg-3 text-center">
+                        <div class="row">
+                            <div class="col-sm-6">
+
+                            </div>
+                            <div class="col-sm-6">
+
+                            </div>
+
+                            <div class="col-sm-6">
+                                <a href="https://networkmonitor-rt.herokuapp.com/">
+                                    <div class="work">
+                                        <img src="assets/images/NetMon_01.JPG" style="width:100%" class="img-responsive" alt="hangman">
+
+                                        <h3>
+                                            <span>IIoT Production Data</span>
+                                        </h3>
+                                    </div>
+                                </a>
+                                <h5>Demo version using IIoT to monitor production equipment &nbsp; </h5>
+                                <h5>&nbsp;</h5>
+                            </div>
+                        </div>dv>
+                    </div>
+
+                </div>
+
+                <div id="section-tech" style="display:none;">
+                    <h3>
+                        Technologies used:
+                        <ul style="margin: 2px 0px 0px 30px;">
+                            <li style="margin-top: 2px;" type="square">Reading JPEG file</li>
+                            <li style="margin-top: 2px;" type="square">Computervision to find edge of form</li>
+                            <li style="margin-top: 2px;" type="square">Rotating and squaring up an image</li>
+                            <li style="margin-top: 2px;" type="square">Scanning an image and locating bubble</li>
+                            <li style="margin-top: 2px;" type="square">Determining a human mark from printed one</li>
+                            <li style="margin-top: 2px;" type="square">Self-calibrating uniformity matrix</li>
+                            <li style="margin-top: 2px;" type="square">MS Visual Studio .NET</li>
+                            <li style="margin-top: 2px;" type="square">Compiled with Xamarin for universal mobile apps</li>
+                        </ul>
+                        <br/> The on-line demo uses:
+                        <ul style="margin: 2px 0px 0px 30px;">
+                            <li style="margin-top: 2px;" type="square">Azure VM</li>
+                            <li style="margin-top: 2px;" type="square">Convert PC app to cloud app</li>
+                            <li style="margin-top: 2px;" type="square">RDP in a Node JS backend</li>
+                            <li style="margin-top: 2px;" type="square">Frontend web socket to backend</li>
+                            <li style="margin-top: 2px;" type="square">Autolaunch app with RDP</li>
+                        </ul>
+                    </h3>
+                </div>
+
+                <div id="section-demo" style="display:none;">
+                    <h3>
+                        <p>Demonstration of App<br/><br/></p>
+                        <p>The user can simply view the app on-line. It is loaded into a VM (virtual machine) and functions like a cloud app within your browser.&nbsp;&nbsp;</p>
+                        <br/>
+                        <p>Alternatively, the user can download a demo PC version of the app. You must have administrative privaledges in order to be able to install the app.&nbsp;&nbsp;</p>
+                        <br/>
+                    </h3>
+                    <div id="bttnClick">
+                        <a onclick="connBttn()" class="bttn_click2"><br/>On-Line Demo</a>
+                    </div>
+                    <div>
+                        <a href="https://drive.google.com/file/d/1ot_sBQPWz0nYpRs-5emLI2F9T8nPLAFP/view?usp=sharing" class="bttn_click2"><br/>Download PC Version</a>
+                    </div>
+                    <br/>
+                    <!-- <button class="btn btn-lg btn-primary btn-block" style="background-color: #34A6FF; border-color: #34A6FF" onclick="connBttn()">Connect</button> -->
+                </div>
+                <h3>&nbsp;</h3>
+            </section>
+
+        </div>
+
+        <!--
+    <div id="main" class="container">
+        <button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #34A6FF; border-color: #34A6FF" onclick="connBttn()">Connect</button>
+        <!-
+		"connect(this.elements['inputIpAddress'].value, this.elements['inputDomain'].value, this.elements['inputUsername'].value, this.elements['inputPassword'].value);return false;">
+		->
+    -->
+
+        <!-- /container -->
+        <canvas id="myCanvas" style="display:none"></canvas>
+    </div>
+    <footer>
+        <div class="container">
+            Copyright &copy; 2020 Rich Budek
+        </div>
+    </footer>
+</body>
+
+</html>
