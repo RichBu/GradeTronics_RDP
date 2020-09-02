@@ -20,6 +20,13 @@ app.get('/', function(req, res) {
 app.get('/GradeTronics', function(req, res) {
     res.sendFile(__dirname + '/client/html/gradetronics.html');
 });
+app.get('/SerialNum', function(req, res) {
+    res.sendFile(__dirname + '/client/html/serialnum.html');
+});
+app.get('/Calculator', function(req, res) {
+    res.sendFile(__dirname + '/client/html/caclulator.html');
+});
+
 var server = http.createServer(app).listen(process.env.PORT || 9250);
 
 require('./server/mstsc')(server);
